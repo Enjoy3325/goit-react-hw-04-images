@@ -10,6 +10,7 @@ export class App extends Component {
     largeImageSrc: '',
     searchInput: '',
     page: 1,
+    // isModalHidden: true,
   };
 
   async componentDidUpdate(_, prevState) {
@@ -38,6 +39,7 @@ export class App extends Component {
       <Wrapper>
         <Searchbar onSubmit={this.handeleSubmitClick} />
         <ImageGallery images={this.state.images} />
+        {/* {this.state.isModalHidden && <Modal></Modal>} */}
       </Wrapper>
     );
   }
