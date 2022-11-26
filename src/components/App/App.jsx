@@ -1,5 +1,7 @@
+import { ImageGallery } from '../ImageGallery/ImageGallery';
 import { fetchImages } from '../ServiceAxios/ServiceAxios';
 import { Searchbar } from '../Searchbar/Searchbar';
+import { Wrapper } from './App.styled';
 import { Component } from 'react';
 
 export class App extends Component {
@@ -7,18 +9,19 @@ export class App extends Component {
     images: [],
     largeImageSrc: '',
     searchInput: '',
+    page: 1,
   };
 
-  componentDidUpdate(_, prevState) {
-    if (
-      this.state.searchInput !== prevState.searchInput &&
-      this.state.searchInput
-    ) {
-      fetchImages();
+  async componentDidUpdate(_, prevState) {
+    if (this.state.searchInput !== prevState.searchInput) {
+      try {
+        const res = await fetchImages(this.state.searchInput, this.state.page);
+        this.setState({ images: res.data.hits });
+      } catch (error) {}
     }
   }
-  handeleSubmitClick = value => {
-    this.setState({ searchInput: value });
+  handeleSubmitClick = searchValue => {
+    this.setState({ searchInput: searchValue });
   };
 
   // onSubmit = async input => {
@@ -32,9 +35,10 @@ export class App extends Component {
   // };
   render() {
     return (
-      <div>
+      <Wrapper>
         <Searchbar onSubmit={this.handeleSubmitClick} />
-      </div>
+        <ImageGallery images={this.state.images} />
+      </Wrapper>
     );
   }
 }
