@@ -1,5 +1,5 @@
-// import PropTypes from 'prop-types';
 import { ItemGalleryLi, ImageGalleryImg } from './ImageGalleryItem.styled';
+// import PropTypes from 'prop-types';
 import React from 'react';
 
 export const ImageGalleryItem = ({ tags, webformatURL }) => {
