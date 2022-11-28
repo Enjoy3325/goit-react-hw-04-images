@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export async function fetchImages(inputValue, page) {
+export async function fetchImages(inputValue, page = 1) {
   try {
     const API_KEY = '29387302-2c01c74d3eaaf5cdbdb3e9280';
     const options = `image_type=photo&orientation=horizontal&safesearch=true&per_page=12`;

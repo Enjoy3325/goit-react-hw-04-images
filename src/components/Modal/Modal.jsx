@@ -1,28 +1,27 @@
 // import PropTypes from 'prop-types';
 import React from 'react';
 import { createPortal } from 'react-dom';
-const modalRoot = document.getElementById('#modal-root');
-
-export class Modal extends Component {
-  componentDidMount() {}
+import { Overlay, ModalStyle } from './Modal.styled';
+const modalRoot = document.getElementById('root');
+console.log('modalRoot :>> ', modalRoot);
+export class Modal extends React.Component {
+  componentDidMount() {
+    window.addEventListener('keydown', this.props.handleKeyDown);
+  }
   // Метот очистки за собой
-  componentWillMount() {}
-  // Закрытие по ESC
-  handleKeydown = e => {};
-  // Закрытие по бэкдропу
-  hendleBackdropClick = e => {
-    console.log('Кликнули в бэкдроп', e.currentTarget);
-    if (e.currentTarget === e.target) {
-      this.props.onClose();
-    }
-  };
+  componentWillMount() {
+    window.removeEventListener('keydown', this.props.handleKeyDown);
+  }
+
   render() {
+    console.log('this.props.handleKeyDown :>> ', this.props.handleKeyDown);
+    const { hendleBackdropClick, largeImageURL, tags } = this.props;
     return createPortal(
-      <div class="overlay">
-        <div class="modal">
-          <img src="" alt="" />
-        </div>
-      </div>,
+      <Overlay onClick={hendleBackdropClick}>
+        <ModalStyle>
+          <img src={largeImageURL} alt={tags} />
+        </ModalStyle>
+      </Overlay>,
       modalRoot
     );
   }

@@ -31,7 +31,7 @@ export class Searchbar extends React.Component {
           <FormInput
             value={this.state.inputValue}
             onChange={this.handleChange}
-            className="input"
+            name="inputValue"
             type="text"
             autoComplete="off"
             autoFocus
