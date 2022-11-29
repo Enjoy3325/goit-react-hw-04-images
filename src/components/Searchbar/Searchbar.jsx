@@ -1,4 +1,5 @@
 // import PropTypes from 'prop-types';
+
 import {
   SearchbarHeader,
   SearchForm,
@@ -15,7 +16,7 @@ export class Searchbar extends React.Component {
   handleSearch = e => {
     e.preventDefault();
     this.props.onSubmit(this.state.inputValue);
-    this.state.inputValue = '';
+    this.setState({ inputValue: '' });
   };
   handleChange = e => {
     this.setState({ inputValue: e.target.value });

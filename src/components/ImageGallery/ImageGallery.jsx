@@ -5,11 +5,12 @@ import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import React from 'react';
 import { Loader } from 'components/Loader/Loader';
 
-export const ImageGallery = ({ images, onClick }) => {
+export const ImageGallery = ({ images, onClick, spinner }) => {
   console.log('images :>> ', images);
 
   return (
     <>
+      {spinner && <Loader />}
       <ListGalleryUl>
         {images.map(({ id, webformatURL, largeImageURL, tags }) => {
           return (
@@ -21,9 +22,8 @@ export const ImageGallery = ({ images, onClick }) => {
             ></ImageGalleryItem>
           );
         })}
-        <Button onClick={onClick} />
-        <Loader />
       </ListGalleryUl>
+      {images.length ? <Button onClick={onClick} /> : null}
     </>
   );
 };
