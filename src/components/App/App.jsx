@@ -1,4 +1,3 @@
-import Notiflix from 'notiflix';
 import { ImageGallery } from '../ImageGallery/ImageGallery';
 import { fetchImages } from '../../ServiceAxios/ServiceAxios';
 import { Searchbar } from '../Searchbar/Searchbar';
