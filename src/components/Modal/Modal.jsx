@@ -17,7 +17,7 @@ export class Modal extends React.Component {
     return createPortal(
       <Overlay onClick={hendleBackdropClick}>
         <ModalStyle>
-          <img src={largeImageURL} alt={tags} />
+          <img src={largeImageURL} alt={tags} width="1100" />
         </ModalStyle>
       </Overlay>,
       modalRoot

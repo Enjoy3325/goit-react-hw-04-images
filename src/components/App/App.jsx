@@ -20,11 +20,11 @@ export class App extends Component {
       (prevState.page !== page && page > 1) ||
       (searchInput !== prevState.searchInput && searchInput !== '')
     ) {
-      this.handleTryCath();
+      this.handleFetch();
     }
   }
 
-  handleTryCath = async () => {
+  handleFetch = async () => {
     this.setState({ bntLoadMore: false, spinner: true });
 
     try {
