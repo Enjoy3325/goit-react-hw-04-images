@@ -1,9 +1,8 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { Overlay, ModalStyle } from './Modal.styled';
 const modalRoot = document.getElementById('root');
-console.log('modalRoot :>> ', modalRoot);
 export class Modal extends React.Component {
   componentDidMount() {
     window.addEventListener('keydown', this.props.handleKeyDown);
@@ -14,7 +13,6 @@ export class Modal extends React.Component {
   }
 
   render() {
-    console.log('this.props.handleKeyDown :>> ', this.props.handleKeyDown);
     const { hendleBackdropClick, largeImageURL, tags } = this.props;
     return createPortal(
       <Overlay onClick={hendleBackdropClick}>
@@ -26,3 +24,9 @@ export class Modal extends React.Component {
     );
   }
 }
+Modal.propTypes = {
+  handleKeyDown: PropTypes.func.isRequired,
+  hendleBackdropClick: PropTypes.func.isRequired,
+  largeImageURL: PropTypes.string,
+  tags: PropTypes.string,
+};

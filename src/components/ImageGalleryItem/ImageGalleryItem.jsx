@@ -1,6 +1,6 @@
 import { Modal } from '../Modal/Modal';
 import { ItemGalleryLi, ImageGalleryImg } from './ImageGalleryItem.styled';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 
 export class ImageGalleryItem extends Component {
@@ -51,3 +51,8 @@ export class ImageGalleryItem extends Component {
     );
   }
 }
+ImageGalleryItem.propTypes = {
+  tags: PropTypes.string,
+  webformatURL: PropTypes.string,
+  largeImageURL: PropTypes.string,
+};

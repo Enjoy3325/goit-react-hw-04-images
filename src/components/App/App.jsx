@@ -15,64 +15,45 @@ export class App extends Component {
     spinner: false,
   };
 
-  async componentDidUpdate(_, prevState) {
-    const { searchInput, page, spinner } = this.state;
-    try {
-      //
-      if (searchInput !== prevState.searchInput && searchInput !== '') {
-        this.setState({ bntLoadMore: false, page: 1, spinner: true });
-
-        const res = await fetchImages(searchInput);
-
-        const { hits, totalHits } = res.data;
-
-        if (hits.length === 0 || hits <= 12) {
-          this.setState({ images: [], bntLoadMore: false });
-          return Notiflix.warning(
-            'Sorry, there are no images matching your search query. Please try again.'
-          );
-        }
-
-        this.setState({
-          images: hits,
-          totalHits: totalHits,
-          bntLoadMore: false,
-        });
-
-        Notiflix.info(`Hooray! We found ${this.state.totalHits} images.`);
-      }
-      if (prevState.page !== this.state.page && this.state.page > 1) {
-        this.setState({ bntLoadMore: true, spinner: true });
-
-        const res = await fetchImages(searchInput, page);
-        console.log('res.data :>> ', res.data);
-        const { hits } = res.data;
-
-        this.setState(
-          prevState => ({
-            images: [...prevState.images, ...hits],
-            bntLoadMore: false,
-          }),
-          () => {
-            if (this.state.totalHits === this.state.images.length) {
-              this.setState({ bntLoadMore: false });
-              return Notiflix.failure(
-                `We're sorry, but you've reached the end of search results.`
-              );
-            }
-          }
-        );
-      }
-      // Скролл страницы
-      if (page !== 1) {
-        this.scrollOnLoad();
-        this.setState({ spinner: true });
-      }
-    } catch (error) {
-      throw new Error('Sorry nothing found!');
+  componentDidUpdate(_, prevState) {
+    const { searchInput, page } = this.state;
+    if (
+      (prevState.page !== page && page > 1) ||
+      (searchInput !== prevState.searchInput && searchInput !== '')
+    ) {
+      this.handleTryCath();
     }
   }
 
+  handleTryCath = async () => {
+    this.setState({ bntLoadMore: false, spinner: true });
+
+    try {
+      const { searchInput, page } = this.state;
+      const res = await fetchImages(searchInput, page);
+      const { hits, totalHits } = res.data;
+      this.setState(prevState => ({
+        images: [...prevState.images, ...hits],
+        totalHits: totalHits,
+      }));
+
+      if (hits.length === 0) {
+        this.setState({ bntLoadMore: false });
+        return alert(
+          'Sorry, there are no images matching your search query. Please try again.'
+        );
+      }
+
+      // Скролл страницы
+      if (page !== 1) {
+        this.scrollOnLoad();
+      }
+    } catch (error) {
+      console.log('Error');
+    } finally {
+      this.setState({ spinner: false });
+    }
+  };
   scrollOnLoad = () => {
     window.scrollTo({
       top: document.documentElement.scrollHeight,
@@ -80,7 +61,11 @@ export class App extends Component {
     });
   };
   handeleSubmitClick = searchValue => {
-    this.setState({ searchInput: searchValue });
+    const { searchInput } = this.state;
+    if (searchInput === searchValue) {
+      return;
+    }
+    this.setState({ searchInput: searchValue, page: 1, images: [] });
   };
 
   handleLoadMore = () => {
@@ -88,17 +73,18 @@ export class App extends Component {
       this.setState(prevState => ({ page: prevState.page + 1 }));
       this.setState({
         bntLoadMore: true,
+        spinner: false,
       });
     }
   };
 
   render() {
-    console.log('this.state.images :>> ', this.state.images);
     return (
       <Wrapper>
         <Searchbar onSubmit={this.handeleSubmitClick} />
         <ImageGallery
           images={this.state.images}
+          totalHits={this.state.totalHits}
           onClick={this.handleLoadMore}
           spinner={this.state.spinner}
         />

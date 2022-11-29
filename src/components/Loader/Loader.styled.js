@@ -5,9 +5,9 @@ export const LoaderStyle = styled.span`
   position: relative;
   left: 50%;
   top: 50%;
-  width: 80px;
-  height: 80px;
-  margin: -35px 0 0 -35px;
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -35px;
   border-radius: 50%;
   border: 3px solid transparent;
   border-top-color: #9370db;
@@ -23,7 +23,7 @@ export const LoaderStyle = styled.span`
     bottom: 5px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: #ba55d3;
+    border-top-color: yellow;
     -webkit-animation: spin 3s linear infinite;
     animation: spin 3s linear infinite;
   }
@@ -36,7 +36,7 @@ export const LoaderStyle = styled.span`
     bottom: 15px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: #ff00ff;
+    border-top-color: blue;
     -webkit-animation: spin 1.5s linear infinite;
     animation: spin 1.5s linear infinite;
   }
