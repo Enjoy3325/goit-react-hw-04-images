@@ -23,7 +23,7 @@ export const App = () => {
         setImages(prevState => [...prevState, ...hits]);
         setTotalHits(prevState => prevState + totalHits);
 
-        if (hits.length === 0 || hits.length < 12) {
+        if (hits.length === 0 || totalHits.length <= 12) {
           setBntLoadMore(false);
           return alert(
             'Sorry, there are no images matching your search query. Please try again.'
@@ -39,7 +39,9 @@ export const App = () => {
         setSpinner(false);
       }
     }
-    if (searchInput) handleFetch();
+    if (searchInput) {
+      handleFetch();
+    }
   }, [page, searchInput]);
 
   const scrollOnLoad = () => {
@@ -56,6 +58,7 @@ export const App = () => {
     setSearchInput(searchValue);
     setImages([]);
     setPage(1);
+    setBntLoadMore(false);
   };
 
   const handleLoadMore = () => {
