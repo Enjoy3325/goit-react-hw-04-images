@@ -13,6 +13,7 @@ export const ImageGallery = ({ images, onClick, spinner, totalHits }) => {
           return (
             <ImageGalleryItem
               key={id}
+              id={id}
               webformatURL={webformatURL}
               largeImageURL={largeImageURL}
               alt={tags}

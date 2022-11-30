@@ -13,7 +13,7 @@ export const App = () => {
   const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
-    const handleFetch = async () => {
+    async function handleFetch() {
       setBntLoadMore(false);
       setSpinner(true);
 
@@ -38,7 +38,7 @@ export const App = () => {
       } finally {
         setSpinner(false);
       }
-    };
+    }
     if (searchInput) handleFetch();
   }, [page, searchInput]);
 
@@ -58,9 +58,9 @@ export const App = () => {
     setPage(1);
   };
 
-  const handleLoadMore = prevState => {
+  const handleLoadMore = () => {
     if (searchInput !== '') {
-      setPage(prevState + 1);
+      setPage(prevState => prevState + 1);
       setBntLoadMore(true);
       setSpinner(false);
     }
@@ -74,7 +74,6 @@ export const App = () => {
         totalHits={totalHits}
         onClick={handleLoadMore}
         spinner={spinner}
-        bntLoadMore={bntLoadMore}
       />
     </Wrapper>
   );
