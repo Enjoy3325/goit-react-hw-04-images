@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { FcSearch } from 'react-icons/fc';
 import {
   SearchbarHeader,
   SearchForm,
@@ -26,6 +27,7 @@ export class Searchbar extends React.Component {
         <SearchForm onSubmit={this.handleSearch}>
           <SearchFormButton type="submit">
             <ButtonLabel>Search</ButtonLabel>
+            <FcSearch size={30} />
           </SearchFormButton>
           <FormInput
             value={this.state.inputValue}
