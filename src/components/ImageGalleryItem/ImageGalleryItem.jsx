@@ -28,9 +28,9 @@ export const ImageGalleryItem = props => {
     <>
       <ItemGalleryLi>
         <ImageGalleryImg
-          key={props.idx}
+          id={props.id}
           src={props.webformatURL}
-          alt={props.ImageGalleryImgtags}
+          alt={props.tags}
           onClick={toggleModal}
         />
       </ItemGalleryLi>
@@ -48,9 +48,10 @@ export const ImageGalleryItem = props => {
 };
 
 ImageGalleryItem.propTypes = {
-  tags: PropTypes.string,
-  webformatURL: PropTypes.string,
+  alt: PropTypes.string,
+  src: PropTypes.string,
   largeImageURL: PropTypes.string,
+  id: PropTypes.number,
 };
 // export class ImageGalleryItem extends Component {
 //   state = {

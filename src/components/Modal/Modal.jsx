@@ -16,12 +16,12 @@ export const Modal = ({
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [handleKeyDown]);
 
   return createPortal(
     <Overlay onClick={hendleBackdropClick}>
       <ModalStyle>
-        <img src={largeImageURL} alt={tags} width="1200" />
+        <img src={largeImageURL} alt={tags} />
       </ModalStyle>
     </Overlay>,
     modalRoot
@@ -29,10 +29,11 @@ export const Modal = ({
 };
 
 Modal.propTypes = {
-  handleKeyDown: PropTypes.func.isRequired,
   hendleBackdropClick: PropTypes.func.isRequired,
+  handleKeyDown: PropTypes.func.isRequired,
+  isModalHidden: PropTypes.func.isRequired,
   largeImageURL: PropTypes.string,
-  tags: PropTypes.string,
+  alt: PropTypes.string,
 };
 
 // export class Modal extends React.Component {

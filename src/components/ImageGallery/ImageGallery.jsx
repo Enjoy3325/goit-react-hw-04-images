@@ -35,5 +35,6 @@ ImageGallery.propTypes = {
   totalHits: PropTypes.number,
   webformatURL: PropTypes.string,
   largeImageURL: PropTypes.string,
-  tags: PropTypes.number,
+  alt: PropTypes.number,
+  bntLoadMore: PropTypes.bool,
 };
