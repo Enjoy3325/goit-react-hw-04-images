@@ -23,7 +23,7 @@ export const App = () => {
         setImages(prevState => [...prevState, ...hits]);
         setTotalHits(prevState => prevState + totalHits);
 
-        if (hits.length === 0) {
+        if (hits.length === 0 || hits.length < 12) {
           setBntLoadMore(false);
           return alert(
             'Sorry, there are no images matching your search query. Please try again.'
@@ -74,6 +74,7 @@ export const App = () => {
         totalHits={totalHits}
         onClick={handleLoadMore}
         spinner={spinner}
+        bntLoadMore={bntLoadMore}
       />
     </Wrapper>
   );
